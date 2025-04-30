@@ -35,7 +35,27 @@ export class Trip {
   get totalMembers(): number {
     return this.members.length;
   }
+  addMember(member: TripMember): void {
+    const exists = this.members.find((m) => m.userId === member.userId);
+    if (exists) {
+      throw new Error('Member already exists in this trip');
+    }
+    this.members.push(member);
+  }
+  getMembers(): TripMember[] {
+    return [...this.members]; // کپی برای محافظت از داده
+  }
+  markInitialAmountAsPaid(userId: string): void {
+    const member = this.members.find((m) => m.userId === userId);
+    if (!member) {
+      throw new Error('Member not found');
+    }
+    member.hasPaidInitialAmount = true;
+  }
 
+  changeStatus(newStatus: TripStatus): void {
+    this.status = newStatus;
+  }
   // می‌تونی این متدها رو به مرور اضافه کنی:
   // - تغییر وضعیت سفر
   // - اضافه‌کردن عضو جدید
