@@ -49,6 +49,6 @@ describe('TripService', () => {
 
   it('should update trip status', () => {
     service.updateStatus(trip, TripStatus.InProgress);
-    expect(trip.status).toBe(TripStatus.InProgress);
+    expect(TripStatus).toBe(TripStatus.InProgress);
   });
 });
