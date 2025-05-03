@@ -1,4 +1,4 @@
-// src/types/trip/trip-status.enum.ts
+// src/types/trip/tripStatus.type.ts
 
 export enum TripStatus {
     NotStarted = 'NOT_STARTED',
