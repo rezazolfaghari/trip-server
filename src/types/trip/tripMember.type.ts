@@ -1,5 +1,5 @@
 // src/types/trip/trip-member.type.ts
-import { InitialPayment } from '@/domain/trip/valueObjects/initialPayment.domain';
+import { InitialPayment } from '@/domain/trip/valueObject/initialPayment.domain';
 
 import { UserId } from '@/types/user/user.type';
 

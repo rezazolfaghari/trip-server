@@ -1,12 +1,21 @@
 import { Trip } from '@/domain/trip/entities/trip.entity';
 import { TripMember } from '@/types/trip/tripMember.type';
 import { TripStatus } from '@/types/trip/tripStatus.type';
-import { InitialPayment } from '@/domain/trip/valueObjects/initialPayment.domain';
+import { InitialPayment } from '@/domain/trip/valueObject/initialPayment.domain';
+import { TripRepository } from '@/domain/trip/repositories/trip.repository.interface';
+
 
 export class TripService {
-  addUserToTrip(trip: Trip, newMember: TripMember): void {
-    trip.addMember(newMember);
+
+  constructor(private readonly tripRepository: TripRepository) {}
+  
+  async addUserToTrip(tripId: string, member: TripMember) {
+    const trip = await this.tripRepository.findById(tripId);
+    if (!trip) throw new Error('Trip not found');
+    trip.addMember(member);
+    await this.tripRepository.save(trip);
   }
+
 
   confirmInitialPayment(trip: Trip, userId: string): void {
     trip.markInitialAmountAsPaid(userId);
